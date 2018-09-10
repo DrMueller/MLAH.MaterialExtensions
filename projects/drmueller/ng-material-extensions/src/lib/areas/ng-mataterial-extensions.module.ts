@@ -25,10 +25,10 @@ import * as table from './tables';
     table.MatTableComponent
   ]
 })
-export class NgMatExtensionsModule {
+export class NgMaterialExtensionsModule {
   public static forRoot(): ModuleWithProviders {
     return {
-      ngModule: NgMatExtensionsModule,
+      ngModule: NgMaterialExtensionsModule,
       providers: [
         table.ColumnDefinitionsBuilderFactoryService
       ]
