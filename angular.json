@@ -121,6 +121,46 @@
           }
         }
       }
+    },
+    "@drmueller/ng-material-extensions": {
+      "root": "projects/drmueller/ng-material-extensions",
+      "sourceRoot": "projects/drmueller/ng-material-extensions/src",
+      "projectType": "library",
+      "prefix": "drm",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/drmueller/ng-material-extensions/tsconfig.lib.json",
+            "project": "projects/drmueller/ng-material-extensions/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/drmueller/ng-material-extensions/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/drmueller/ng-material-extensions/src/test.ts",
+            "tsConfig": "projects/drmueller/ng-material-extensions/tsconfig.spec.json",
+            "karmaConfig": "projects/drmueller/ng-material-extensions/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/drmueller/ng-material-extensions/tsconfig.lib.json",
+              "projects/drmueller/ng-material-extensions/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-material-extensions-demo"

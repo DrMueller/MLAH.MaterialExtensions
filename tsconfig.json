@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@drmueller/ng-material-extensions": [
+        "dist/drmueller/ng-material-extensions"
+      ],
+      "@drmueller/ng-material-extensions/*": [
+        "dist/drmueller/ng-material-extensions/*"
+      ]
+    }
   }
 }
