@@ -11,7 +11,6 @@ import { TableSortingService } from '../../services';
   styleUrls: ['./mat-table.component.scss']
 })
 export class MatTableComponent<T> {
-
   @Input() public columnDefinitions: ColumnDefinitions;
   @Output() public selectionChanged = new EventEmitter<T[]>();
   @ViewChild(MatPaginator) public paginator: MatPaginator;
