@@ -37,12 +37,13 @@ import * as table from './tables';
     table.MatTableComponent
   ]
 })
+
 export class NgMaterialExtensionsModule {
   public static forRoot(): ModuleWithProviders {
     return {
       ngModule: NgMaterialExtensionsModule,
       providers: [
-        table.ColumnDefinitionsBuilderFactoryService
+        table.ColDefBuilderFactoryService
       ]
     };
   }

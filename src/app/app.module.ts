@@ -1,8 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import * as services from './services';
+import {
+  NgMaterialExtensionsModule
+} from '../../projects/drmueller/ng-material-extensions/src/public_api';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,9 +15,12 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    NgMaterialExtensionsModule
   ],
-  providers: [],
+  providers: [
+    services.IndividualColDefBuilderService,
+    services.IndividualRepositoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

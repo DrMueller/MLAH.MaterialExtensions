@@ -2,7 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatTable, Sort } from '@angular/material';
 
-import { ColumnDefinitions } from '../../models';
+import { ColumnDefinitionsContainer } from '../../models';
 import { TableSortingService } from '../../services';
 
 @Component({
@@ -11,7 +11,7 @@ import { TableSortingService } from '../../services';
   styleUrls: ['./mat-table.component.scss']
 })
 export class MatTableComponent<T> {
-  @Input() public columnDefinitions: ColumnDefinitions;
+  @Input() public columnDefinitions: ColumnDefinitionsContainer<T>;
   @Output() public selectionChanged = new EventEmitter<T[]>();
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatTable) public matTable: MatTable<T>;
@@ -19,7 +19,7 @@ export class MatTableComponent<T> {
   private _data: T[];
   private selection = new SelectionModel<T>(true);
 
-  public constructor(private sortingService: TableSortingService) {
+  public constructor(private sortingService: TableSortingService<T>) {
   }
 
   @Input() public set data(values: T[]) {
@@ -29,9 +29,9 @@ export class MatTableComponent<T> {
     }
   }
 
-  public deleteSelectedEntries(): void {
-    this.selection.selected.forEach(dto => {
-      const dtoIndex = this.data.indexOf(dto);
+  public deleteEntris(entries: T[]): void {
+    entries.forEach(entry => {
+      const dtoIndex = this.data.indexOf(entry);
       this.data.splice(dtoIndex, 1);
     });
 

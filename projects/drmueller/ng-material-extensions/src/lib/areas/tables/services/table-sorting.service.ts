@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material';
-import { ColumnDefinitions } from '..';
+
+import { ColumnDefinitionsContainer } from '../';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TableSortingService {
-  public sortEntries(data: any[], sort: Sort, columnDefinitions: ColumnDefinitions): any[] {
+export class TableSortingService<T> {
+  public sortEntries(data: T[], sort: Sort, columnDefinitions: ColumnDefinitionsContainer<T>): T[] {
     if (!sort.active || sort.direction === '') {
       return data;
     }
 
-    const propertyName = columnDefinitions.getPropertyNameForName(sort.active);
+    const propertyName = columnDefinitions.getPropertyName(sort.active);
     const sortAscending = sort.direction === 'asc';
 
-    const result = data.sort((a: any, b: any) => {
+    const result = data.sort((a: T, b: T) => {
       const objectaValue = a[propertyName];
       const objectbValue = b[propertyName];
       return this.compare(objectaValue, objectbValue, sortAscending);
