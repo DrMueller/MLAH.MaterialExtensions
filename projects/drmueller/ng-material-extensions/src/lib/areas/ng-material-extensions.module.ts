@@ -36,16 +36,10 @@ import * as table from './tables';
     MatFormFieldModule,
     MatDialogModule,
     table.MatTableComponent
+  ],
+  providers: [
+    table.ColDefBuilderFactoryService
   ]
 })
-
 export class NgMaterialExtensionsModule {
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: NgMaterialExtensionsModule,
-      providers: [
-        table.ColDefBuilderFactoryService
-      ],
-    };
-  }
 }

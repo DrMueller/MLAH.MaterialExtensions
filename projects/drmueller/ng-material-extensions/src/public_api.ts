@@ -2,4 +2,4 @@
  * Public API Surface of ng-mat-extensions
  */
 
-export * from './lib/areas';
+export * from './lib/areas/index';
