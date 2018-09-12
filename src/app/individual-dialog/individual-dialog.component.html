@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>
+  individual-dialog works!
+</h1>
+
+<div class="flex-columns">
+  <div mat-dialog-content>
+    {{ individual | json }}
+  </div>
+
+  <div class="actions">
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>No</button>
+      <button mat-button [mat-dialog-close]="'Ok clicked'" cdkFocusInitial>OK</button>
+    </div>
+  </div>
+</div>

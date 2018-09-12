@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatSidenavModule, MatSortModule,
-  MatTableModule, MatToolbarModule
+  MatTableModule, MatToolbarModule, MatDialogModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,8 +15,8 @@ import * as table from './tables';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    BrowserAnimationsModule,
-    MatButtonModule
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     table.MatTableComponent
@@ -34,6 +34,7 @@ import * as table from './tables';
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
     table.MatTableComponent
   ]
 })

@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ComponentType } from '@angular/cdk/portal';
 
 @Injectable({
@@ -12,13 +12,13 @@ export class ModalDialogService {
     private ngZone: NgZone
   ) { }
 
-  public showModalDialog<T>(modalData: any, component: ComponentType<T>): void {
+  public showModalDialog<T>(modalData: any, component: ComponentType<T>): MatDialogRef<T> {
     const config = new MatDialogConfig();
     config.data = modalData;
     config.disableClose = true;
 
-    this.ngZone.run(() => {
-      this.dialog.open(component, config);
+    return this.ngZone.run(() => {
+      return this.dialog.open(component, config);
     });
   }
 }

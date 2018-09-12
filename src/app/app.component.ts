@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { IndividualColDefBuilderService, IndividualRepositoryService } from './services';
 import {
-    ColumnDefinitionsContainer, MatTableComponent
+    ColumnDefinitionsContainer, MatTableComponent, ModalDialogService
 } from '../../projects/drmueller/ng-material-extensions/src/public_api';
 import { Individual } from './models';
+import { IndividualDialogComponent } from './individual-dialog/individual-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +18,18 @@ export class AppComponent implements OnInit {
   public columnDefinitions: ColumnDefinitionsContainer<Individual>;
   public individuals: Individual[] = [];
   public selectedIndividuals: Individual[] = [];
+  public matDialogResult: any;
 
   public constructor(
     private individualRepository: IndividualRepositoryService,
-    private individualColDefBuilder: IndividualColDefBuilderService) {
+    private individualColDefBuilder: IndividualColDefBuilderService,
+    private modalDialogService: ModalDialogService) {
+  }
+
+  public showDialog(): void {
+    this.modalDialogService.showModalDialog(this.selectedIndividuals[0], IndividualDialogComponent).afterClosed().subscribe(rslt => {
+      this.matDialogResult = rslt;
+    });
   }
 
   public deletedSelectedIndividuals(): void {

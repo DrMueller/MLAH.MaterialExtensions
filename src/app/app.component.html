@@ -2,6 +2,7 @@
   <mat-card-title>Actions</mat-card-title>
   <mat-card-content>
     <button mat-button [disabled]="!areIndividualsSelected" (click)="deletedSelectedIndividuals()">Delete</button>
+    <button mat-button [disabled]="!areIndividualsSelected" (click)="showDialog()">Dialog!</button>
   </mat-card-content>
 </mat-card>
 
@@ -13,4 +14,10 @@
   </mat-card-content>
 </mat-card>
 
+<p>
+Selection:
 {{ selectedIndividuals | json }}
+</p>
+<p>
+  Dialog result: {{ matDialogResult }}
+</p>
