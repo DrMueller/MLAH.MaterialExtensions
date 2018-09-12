@@ -44,7 +44,7 @@ export class NgMaterialExtensionsModule {
       ngModule: NgMaterialExtensionsModule,
       providers: [
         table.ColDefBuilderFactoryService
-      ]
+      ],
     };
   }
 }
