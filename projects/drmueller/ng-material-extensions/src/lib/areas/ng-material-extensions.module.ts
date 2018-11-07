@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatSidenavModule, MatSortModule,
@@ -37,9 +37,14 @@ import * as table from './tables';
     MatDialogModule,
     table.MatTableComponent
   ],
-  providers: [
-    table.ColDefBuilderFactoryService
-  ]
 })
 export class NgMaterialExtensionsModule {
+  public static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: NgMaterialExtensionsModule,
+      providers: [
+        table.ColDefBuilderFactoryService
+      ]
+    };
+  }
 }
