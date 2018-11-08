@@ -5,7 +5,6 @@ import {
   MatListModule, MatMenuModule, MatPaginatorModule, MatSidenavModule, MatSortModule,
   MatTableModule, MatToolbarModule, MatDialogModule
 } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import * as table from './tables';
 
@@ -15,8 +14,7 @@ import * as table from './tables';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatDialogModule,
-    BrowserAnimationsModule
+    MatDialogModule
   ],
   declarations: [
     table.MatTableComponent
