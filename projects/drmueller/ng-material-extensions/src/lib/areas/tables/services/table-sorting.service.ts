@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Sort } from '@angular/material';
 
-import { ColumnDefinitionsContainer } from '../';
+import { ColumnDefinitionsContainer } from '../models/column-definitions-container.model';
 
 @Injectable({
   providedIn: 'root'

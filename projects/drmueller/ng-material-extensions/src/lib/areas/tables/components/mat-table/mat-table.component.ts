@@ -2,8 +2,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, MatTable, Sort } from '@angular/material';
 
-import { ColumnDefinitionsContainer } from '../../models';
-import { TableSortingService } from '../../services';
+import { ColumnDefinitionsContainer } from '../../models/index';
+import { TableSortingService } from '../../services/index';
 
 @Component({
   selector: 'drm-mat-table',

@@ -6,7 +6,7 @@ import {
   MatTableModule, MatToolbarModule, MatDialogModule
 } from '@angular/material';
 
-import * as table from './tables';
+import * as table from './tables/index';
 
 @NgModule({
   imports: [

@@ -1,1 +1,1 @@
-export * from './mat-table';
+export * from './mat-table/index';

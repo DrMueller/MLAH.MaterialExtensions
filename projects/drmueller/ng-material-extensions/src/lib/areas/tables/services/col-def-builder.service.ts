@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ColumnDefinition, ColumnDefinitionsContainer } from '../models';
+import { ColumnDefinition, ColumnDefinitionsContainer } from '../models/index';
 
 @Injectable({
   providedIn: 'root'
