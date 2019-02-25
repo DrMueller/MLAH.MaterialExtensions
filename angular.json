@@ -142,6 +142,13 @@
             }
           }
         },
+        "unit-test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/drmueller/ng-material-extensions/main-unit-tests.ts",
+            "karmaConfig": "projects/drmueller/ng-material-extensions/karma.conf.js"
+          }
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
