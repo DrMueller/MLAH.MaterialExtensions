@@ -6,7 +6,6 @@ import { ComponentType } from '@angular/cdk/portal';
   providedIn: 'root'
 })
 export class ModalDialogService {
-
   constructor(
     private dialog: MatDialog,
     private ngZone: NgZone

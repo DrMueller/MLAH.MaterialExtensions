@@ -1,15 +1,21 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { ModalDialogService } from './modal-dialog.service';
+import { MatDialog } from '@angular/material';
 
 describe('ModalDialogService', () => {
-  beforeEach(() => {
+  const dialogSpy: any = {};
+  beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [ModalDialogService]
-    });
-  });
+      providers: [
+        {
+          provide: MatDialog, useValue: dialogSpy
+        }
+      ]
+    }));
 
-  it('should be created', inject([ModalDialogService], (service: ModalDialogService) => {
+  it('should be created', () => {
+    const service: ModalDialogService = TestBed.get(ModalDialogService);
     expect(service).toBeTruthy();
-  }));
+  });
 });

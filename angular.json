@@ -145,8 +145,9 @@
         "unit-test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/drmueller/ng-material-extensions/main-unit-tests.ts",
-            "karmaConfig": "projects/drmueller/ng-material-extensions/karma.conf.js"
+            "main": "projects/drmueller/ng-material-extensions/src/test.ts",
+            "tsConfig": "projects/drmueller/ng-material-extensions/tsconfig.spec.json",
+            "karmaConfig": "projects/drmueller/ng-material-extensions/karma-ci-unit-tests.conf.js"
           }
         },
         "test": {
