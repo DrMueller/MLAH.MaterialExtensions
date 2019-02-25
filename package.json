@@ -8,10 +8,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ci-build-lib-prod": "ng build @drmueller/ng-base-services --prod",
-    "ci-unit-test-lib": "ng run @drmueller/ng-base-services:unit-test",
-    "ci-lint-lib": "tslint --project projects/drmueller/ng-base-services/tslint.json",
-    "local-unit-test-lib": "ng test @drmueller/testing"
+    "ci-build-lib-prod": "ng build @drmueller/ng-material-extensions --prod",
+    "ci-unit-test-lib": "ng run @drmueller/ng-material-extensions:unit-test",
+    "ci-lint-lib": "tslint --project projects/drmueller/ng-material-extensions/tslint.json",
+    "local-unit-test-lib": "ng test @drmueller/ng-material-extensions"
   },
   "private": true,
   "dependencies": {
