@@ -1,10 +1,4 @@
-import { Injectable } from '@angular/core';
-
 import { ColumnDefinition, ColumnDefinitionsContainer } from '../models/index';
-
-@Injectable({
-  providedIn: 'root'
-})
 
 export class ColDefBuilderService<T> {
   private _definitions: ColumnDefinition<T>[];
@@ -13,8 +7,8 @@ export class ColDefBuilderService<T> {
     this._definitions = [];
   }
 
-  public withColumnDefinition(name: string, headerDescription: string, propertyName: keyof T): ColDefBuilderService<T> {
-    const colDef = new ColumnDefinition<T>(name, headerDescription, propertyName);
+  public withColumnDefinition(propertyName: keyof T, headerDescription: string): ColDefBuilderService<T> {
+    const colDef = new ColumnDefinition<T>(propertyName, headerDescription);
     this._definitions.push(colDef);
     return this;
   }

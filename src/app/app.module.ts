@@ -9,6 +9,8 @@ import {
 } from '../../projects/drmueller/ng-material-extensions/src/public_api';
 import { AppComponent } from './app.component';
 import { IndividualDialogComponent } from './individual-dialog/individual-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { IndividualDialogComponent } from './individual-dialog/individual-dialog
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    NgMaterialExtensionsModule
+    NgMaterialExtensionsModule,
+    FormsModule,
+    MatRadioModule
   ],
   providers: [
     services.IndividualColDefBuilderService,

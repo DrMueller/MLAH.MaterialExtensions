@@ -1,64 +1,81 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { MatPaginator, MatTable, Sort } from '@angular/material';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material';
 
-import { ColumnDefinitionsContainer } from '../../models/index';
-import { TableSortingService } from '../../services/index';
+import { ColumnDefinitionsContainer, TableRowSelectionType } from '../../models/index';
 
 @Component({
   selector: 'drm-mat-table',
   templateUrl: './mat-table.component.html',
   styleUrls: ['./mat-table.component.scss']
 })
-export class MatTableComponent<T> {
+export class MatTableComponent<T> implements OnInit, AfterViewInit {
+
   @Input() public columnDefinitions: ColumnDefinitionsContainer<T>;
-  @Output() public selectionChanged = new EventEmitter<T[]>();
-  @ViewChild(MatPaginator) public paginator: MatPaginator;
-  @ViewChild(MatTable) public matTable: MatTable<T>;
-
-  private _data: T[];
-  private selection = new SelectionModel<T>(true);
-
-  public constructor(private sortingService: TableSortingService<T>) {
-  }
 
   @Input() public set data(values: T[]) {
     this._data = values;
     if (this.matTable) {
-      this.matTable.renderRows();
+      this.bindData();
     }
   }
 
-  public deleteEntris(entries: T[]): void {
+  @Input() public set rowSelectionType(value: TableRowSelectionType) {
+    this._rowSelectionType = value;
+    this.initializeDataSource();
+  }
+
+  @Output() public selectionChanged = new EventEmitter<T[]>();
+
+  public searchText: string;
+  public dataSource: MatTableDataSource<T>;
+
+  public selection: SelectionModel<T>;
+  @ViewChild(MatPaginator) public matPaginator: MatPaginator;
+  @ViewChild(MatSort) public matSort: MatSort;
+  @ViewChild(MatTable) public matTable: MatTable<T>;
+
+  private _rowSelectionType: TableRowSelectionType;
+  private _data: T[];
+
+  public deleteEntries(entries: T[]): void {
     entries.forEach(entry => {
-      const dtoIndex = this.data.indexOf(entry);
-      this.data.splice(dtoIndex, 1);
+      const dtoIndex = this._data.indexOf(entry);
+      this._data.splice(dtoIndex, 1);
     });
 
-    this.selection.clear();
+    this.selection.deselect(...entries);
+    this.bindData();
     this.selectionChanged.emit(this.selection.selected);
-    this.renderRows();
+    this.matTable.renderRows();
   }
 
-  public get data(): T[] {
-    return this._data;
-  }
+  public get columnNames(): string[] {
+    const result: string[] = [];
 
-  public get entriesCount(): number {
-    if (!this.data) {
-      return 0;
+    if (this._rowSelectionType !== TableRowSelectionType.ReadOnly) {
+      result.push('Select');
     }
 
-    return this.data.length;
+    result.push(...this.columnDefinitions.columnNames.map(f => f.toString()));
+    return result;
+  }
+
+  public get isSelectionAllowed(): boolean {
+    return this._rowSelectionType !== TableRowSelectionType.ReadOnly;
   }
 
   public isRowSelected(row: T): boolean {
     return this.selection.isSelected(row);
   }
 
-  public sortingChanged(sort: Sort): void {
-    this.data = this.sortingService.sortEntries(this.data, sort, this.columnDefinitions);
-    this.renderRows();
+  public ngAfterViewInit(): void {
+    this.dataSource.paginator = this.matPaginator;
+    this.dataSource.sort = this.matSort;
+  }
+
+  public ngOnInit(): void {
+    this.initializeDataSource();
   }
 
   public toggleRowSelection(row: T): void {
@@ -66,7 +83,18 @@ export class MatTableComponent<T> {
     this.selectionChanged.emit(this.selection.selected);
   }
 
-  private renderRows(): void {
-    this.matTable.renderRows();
+  public searchTextChanged(newSearchText: string): void {
+    this.dataSource.filter = newSearchText.toLocaleLowerCase();
+  }
+
+  private bindData(): void {
+    this.dataSource = new MatTableDataSource<T>(this._data);
+    this.dataSource.paginator = this.matPaginator;
+    this.dataSource.sort = this.matSort;
+  }
+
+  private initializeDataSource(): void {
+    this.selection = new SelectionModel<T>(this._rowSelectionType === TableRowSelectionType.Multi, []);
+    this.dataSource = new MatTableDataSource<T>(this._data);
   }
 }

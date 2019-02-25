@@ -6,17 +6,21 @@
   </mat-card-content>
 </mat-card>
 
-
-<mat-card>
-  <mat-card-title>Events</mat-card-title>
+<mat-card class="mat-card">
+  <mat-card-title>Row Selection Types</mat-card-title>
   <mat-card-content>
-    <drm-mat-table (selectionChanged)="rowSelectionChanged($event)" [columnDefinitions]="columnDefinitions" [data]="individuals"></drm-mat-table>
+    <mat-radio-group [(ngModel)]="selectedRowSelectionKey" class="radio-group">
+      <mat-radio-button class="radio-button" [value]="0">None</mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="1">Single</mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="2">Multi</mat-radio-button>
+    </mat-radio-group>
   </mat-card-content>
 </mat-card>
-<p>
-Selection:
-{{ selectedIndividuals | json }}
-</p>
-<p>
-  Dialog result: {{ matDialogResult }}
-</p>
+
+<mat-card class="mat-card">
+  <mat-card-title>Defects</mat-card-title>
+  <mat-card-content>
+    <drm-mat-table [rowSelectionType]="rowSelectionType" (selectionChanged)="rowSelectionChanged($event)"
+      [columnDefinitions]="columnDefinitions" [data]="individuals"></drm-mat-table>
+  </mat-card-content>
+</mat-card>

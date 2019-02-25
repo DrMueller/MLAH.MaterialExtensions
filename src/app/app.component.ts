@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { IKeyValuePair } from '@drmueller/language-extensions';
+
 import { IndividualColDefBuilderService, IndividualRepositoryService } from './services';
 import {
-    ColumnDefinitionsContainer, MatTableComponent, ModalDialogService
+    ColumnDefinitionsContainer, MatTableComponent, ModalDialogService, TableRowSelectionType
 } from '../../projects/drmueller/ng-material-extensions/src/public_api';
 import { Individual } from './models';
 import { IndividualDialogComponent } from './individual-dialog/individual-dialog.component';
@@ -20,6 +22,12 @@ export class AppComponent implements OnInit {
   public selectedIndividuals: Individual[] = [];
   public matDialogResult: any;
 
+  public selectedRowSelectionKey: number;
+
+  public get rowSelectionType(): TableRowSelectionType {
+    return this.selectedRowSelectionKey;
+  }
+
   public constructor(
     private individualRepository: IndividualRepositoryService,
     private individualColDefBuilder: IndividualColDefBuilderService,
@@ -33,7 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   public deletedSelectedIndividuals(): void {
-    this.table.deleteEntris(this.selectedIndividuals);
+    this.table.deleteEntries(this.selectedIndividuals);
   }
 
   public get areIndividualsSelected(): boolean {

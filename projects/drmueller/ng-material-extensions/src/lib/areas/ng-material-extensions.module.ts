@@ -3,10 +3,11 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatSidenavModule, MatSortModule,
-  MatTableModule, MatToolbarModule, MatDialogModule
+  MatTableModule, MatToolbarModule, MatDialogModule, MatCheckboxModule
 } from '@angular/material';
 
 import * as table from './tables/index';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -14,7 +15,10 @@ import * as table from './tables/index';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule,
+    FormsModule,
+    MatCheckboxModule
   ],
   declarations: [
     table.MatTableComponent

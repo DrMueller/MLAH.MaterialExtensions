@@ -12,10 +12,10 @@ export class IndividualColDefBuilderService {
   public buildDefinitions(): ColumnDefinitionsContainer<Individual> {
     return this.builderFactory
     .createBuilder<Individual>()
-    .withColumnDefinition('id', 'ID', 'id')
-    .withColumnDefinition('emailAddress', 'E-Mail Address', 'emailAddress')
-    .withColumnDefinition('firstName', 'First Name', 'firstName')
-    .withColumnDefinition('lastName', 'Last Name', 'lastName')
+    .withColumnDefinition('id', 'ID')
+    .withColumnDefinition('emailAddress', 'E-Mail Address')
+    .withColumnDefinition('firstName', 'First Name')
+    .withColumnDefinition('lastName', 'Last Name')
     .build();
   }
 }
