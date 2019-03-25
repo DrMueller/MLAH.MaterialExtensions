@@ -6,12 +6,14 @@ import {
   MatTableModule, MatToolbarModule, MatDialogModule, MatCheckboxModule
 } from '@angular/material';
 
-import * as table from './tables/index';
 import { FormsModule } from '@angular/forms';
+import { ColDefBuilderFactoryService } from './tables/services';
+import { MatTableComponent } from './tables/components/mat-table';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatIconModule,
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
@@ -21,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     MatCheckboxModule
   ],
   declarations: [
-    table.MatTableComponent
+    MatTableComponent
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +39,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
-    table.MatTableComponent
+    MatTableComponent
   ],
 })
 export class NgMaterialExtensionsModule {
@@ -45,7 +47,7 @@ export class NgMaterialExtensionsModule {
     return {
       ngModule: NgMaterialExtensionsModule,
       providers: [
-        table.ColDefBuilderFactoryService
+        ColDefBuilderFactoryService
       ]
     };
   }

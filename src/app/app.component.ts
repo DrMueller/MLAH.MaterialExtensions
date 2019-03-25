@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 
 import { IKeyValuePair } from '@drmueller/language-extensions';
 
 import { IndividualColDefBuilderService, IndividualRepositoryService } from './services';
 import {
-    ColumnDefinitionsContainer, MatTableComponent, ModalDialogService, TableRowSelectionType
+  ColumnDefinitionsContainer, MatTableComponent, ModalDialogService, TableRowSelectionType
 } from '../../projects/drmueller/ng-material-extensions/src/public_api';
 import { Individual } from './models';
 import { IndividualDialogComponent } from './individual-dialog/individual-dialog.component';
@@ -17,12 +17,14 @@ import { IndividualDialogComponent } from './individual-dialog/individual-dialog
 export class AppComponent implements OnInit {
 
   @ViewChild(MatTableComponent) public table: MatTableComponent<Individual>;
-  public columnDefinitions: ColumnDefinitionsContainer<Individual>;
+  public columnDefinitions: ColumnDefinitionsContainer;
   public individuals: Individual[] = [];
   public selectedIndividuals: Individual[] = [];
   public matDialogResult: any;
 
   public selectedRowSelectionKey: number;
+
+  @ViewChild('compWithButton') compWithButtonTemplate: TemplateRef<any>;
 
   public get rowSelectionType(): TableRowSelectionType {
     return this.selectedRowSelectionKey;
@@ -48,8 +50,14 @@ export class AppComponent implements OnInit {
     return this.selectedIndividuals && this.selectedIndividuals.length > 0;
   }
 
+  public componentButtonClicked(individualId: string): void {
+    const individual = this.individuals.find(ind => ind.id === individualId);
+    alert('Hello from Component Button: ' + JSON.stringify(individual));
+  }
+
   public ngOnInit(): void {
-    this.columnDefinitions = this.individualColDefBuilder.buildDefinitions();
+    this.selectedRowSelectionKey = 1;
+    this.columnDefinitions = this.individualColDefBuilder.buildDefinitions(this.compWithButtonTemplate);
     this.individuals = this.individualRepository.loadAll();
   }
 

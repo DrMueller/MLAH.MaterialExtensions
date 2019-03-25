@@ -1,10 +1,10 @@
-import { ColumnDefinition } from '.';
+import { ColumnDefinitionBase } from './col-defs/column-definition-base.model';
 
-export class ColumnDefinitionsContainer<T> {
-  public constructor(public readonly definitions: ColumnDefinition<T>[]) {
+export class ColumnDefinitionsContainer {
+  public constructor(public readonly definitions: ColumnDefinitionBase[]) {
   }
 
-  public get columnNames(): (keyof T)[] {
-    return this.definitions.map(def => def.propertyName);
+  public get allColumnKeys(): string[] {
+    return this.definitions.map(def => def.columnKey);
   }
 }

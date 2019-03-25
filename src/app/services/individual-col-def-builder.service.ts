@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 import { ColDefBuilderFactoryService, ColumnDefinitionsContainer } from '../../../projects/drmueller/ng-material-extensions/src/public_api';
 import { Individual } from '../models';
 
@@ -9,13 +9,14 @@ export class IndividualColDefBuilderService {
 
   public constructor(private builderFactory: ColDefBuilderFactoryService) { }
 
-  public buildDefinitions(): ColumnDefinitionsContainer<Individual> {
+  public buildDefinitions(compWithButtonTemplate: TemplateRef<any>): ColumnDefinitionsContainer {
     return this.builderFactory
-    .createBuilder<Individual>()
-    .withColumnDefinition('id', 'ID')
-    .withColumnDefinition('emailAddress', 'E-Mail Address')
-    .withColumnDefinition('firstName', 'First Name')
-    .withColumnDefinition('lastName', 'Last Name')
+    .startBuilding()
+    .withColumn('id', 'ID').bindingTo<Individual>('id')
+    .withColumn('emailAddress', 'E-Mail Address').bindingTo<Individual>('emailAddress')
+    .withColumn('firstName', 'First Name').bindingTo<Individual>('firstName')
+    .withColumn('lastName', 'Last Name').bindingTo<Individual>('lastName')
+    .withColumn('cmp1', 'Button 1').withTemplate(compWithButtonTemplate)
     .build();
   }
 }

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { ColDefBuilderService } from './col-def-builder.service';
+import { IColDefBuilderOrchestratorService } from '.';
+import { ColDefBuilderOrchestratorService } from './implementation/col-def-builder-orchestrator.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColDefBuilderFactoryService {
-  public createBuilder<T>(): ColDefBuilderService<T> {
-    return new ColDefBuilderService<T>();
+  public startBuilding(): IColDefBuilderOrchestratorService {
+    return new ColDefBuilderOrchestratorService();
   }
 }
-

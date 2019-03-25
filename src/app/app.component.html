@@ -21,6 +21,9 @@
   <mat-card-title>Defects</mat-card-title>
   <mat-card-content>
     <drm-mat-table [rowSelectionType]="rowSelectionType" (selectionChanged)="rowSelectionChanged($event)"
-      [columnDefinitions]="columnDefinitions" [data]="individuals"></drm-mat-table>
+      [columnDefinitions]="columnDefinitions" idSelector="id" [data]="individuals"></drm-mat-table>
+    <ng-template #compWithButton>
+      <app-table-button (buttonClick)=componentButtonClicked($event)></app-table-button>
+    </ng-template>
   </mat-card-content>
 </mat-card>

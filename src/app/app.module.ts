@@ -11,11 +11,13 @@ import { AppComponent } from './app.component';
 import { IndividualDialogComponent } from './individual-dialog/individual-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material';
+import { TableButtonComponent } from './table-button/table-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IndividualDialogComponent
+    IndividualDialogComponent,
+    TableButtonComponent
   ],
   entryComponents: [
     IndividualDialogComponent
