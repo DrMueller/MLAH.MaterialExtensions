@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
 
 import { IColDefBuilderOrchestratorService, IColDefBuilderService } from '..';
-import { BindingColumnDefinition } from '../../models/col-defs/binding-column-definition.model';
-import { ColumnDefinitionBase } from '../../models/col-defs/column-definition-base.model';
-import { TemplateColumnDefinition } from '../../models/col-defs/template-column-definition.model';
+import { ColumnDefinitionBase } from '../../models/col-defs';
+import { IColDefValueBuilderService, BindingColDefValueBuilderService, TemplateColDefValueBuilderService } from './col-def-values';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ColDefBuilderService implements IColDefBuilderService {
-  private _propertyName: any | undefined = undefined;
-  private _templateRef: any | undefined = undefined;
+  private _valueBuilder: IColDefValueBuilderService;
 
   public constructor(
     private orchestrator: IColDefBuilderOrchestratorService,
@@ -20,24 +18,16 @@ export class ColDefBuilderService implements IColDefBuilderService {
   }
 
   public bindingTo<T>(propertyName: keyof T): IColDefBuilderOrchestratorService {
-    this._propertyName = propertyName;
+    this._valueBuilder = new BindingColDefValueBuilderService(this.columnKey, this.headerDescription, propertyName);
     return this.orchestrator;
   }
 
-  public withTemplate(componentType: any): IColDefBuilderOrchestratorService {
-    this._templateRef = componentType;
+  public withTemplate(template: TemplateRef<any>): IColDefBuilderOrchestratorService {
+    this._valueBuilder = new TemplateColDefValueBuilderService(this.columnKey, this.headerDescription, template);
     return this.orchestrator;
   }
 
   public build(): ColumnDefinitionBase {
-    if (this._propertyName) {
-      return new BindingColumnDefinition(this.columnKey, this.headerDescription, this._propertyName);
-    }
-
-    if (this._templateRef) {
-      return new TemplateColumnDefinition(this.columnKey, this.headerDescription, this._templateRef);
-    }
-
-    throw Error('Well, that went south quickly.');
+    return this._valueBuilder.build();
   }
 }
