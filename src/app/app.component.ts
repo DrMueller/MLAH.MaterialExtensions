@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     return this.selectedIndividuals && this.selectedIndividuals.length > 0;
   }
 
-  public componentButtonClicked(individualId: string): void {
+  public componentButtonClicked(individualId: number): void {
     const individual = this.individuals.find(ind => ind.id === individualId);
     alert('Hello from Component Button: ' + JSON.stringify(individual));
   }

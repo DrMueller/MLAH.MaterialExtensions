@@ -1,24 +1,20 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { TableTemplateBaseComponent } from 'projects/drmueller/ng-material-extensions/src/public_api';
 
 @Component({
   selector: 'app-table-button',
   templateUrl: './table-button.component.html',
   styleUrls: ['./table-button.component.css']
 })
-export class TableButtonComponent {
+export class TableButtonComponent extends TableTemplateBaseComponent {
 
-  @Output() public buttonClick: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public buttonClick: EventEmitter<number> = new EventEmitter<number>();
 
   public shootEvent(event: MouseEvent): void {
-    let target = <any>event.target;
-    if (target) {
-
-      while (target.localName !== 'td') {
-        target = target.parentNode;
-      }
-
-      const individualId = target.getAttribute('data-row-id');
-      this.buttonClick.next(individualId);
+    const individualId = super.fetchRowId(event);
+    if (individualId) {
+      const indNum = parseInt(individualId, 10);
+      this.buttonClick.next(indNum);
     }
   }
 }

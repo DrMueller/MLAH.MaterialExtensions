@@ -6,19 +6,19 @@ export class IndividualRepositoryService {
       <Individual>{
         emailAddress: 'test@gmx.ch',
         firstName: 'John',
-        id: 'a123',
+        id: 123,
         lastName: 'Wayne'
       },
       <Individual>{
         emailAddress: 'drmueller@live.de',
         firstName: 'Matthias',
-        id: 'a321',
+        id: 321,
         lastName: 'Müller'
       },
       <Individual>{
         emailAddress: 'fakeemail@gmx.ch',
         firstName: 'Joe',
-        id: 'a444',
+        id: 444,
         lastName: 'Doe'
       },
     ];
