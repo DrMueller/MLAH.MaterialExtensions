@@ -4,8 +4,9 @@ export class BindingColumnDefinition extends ColumnDefinitionBase {
   public constructor(
     columnKey: string,
     headerDescription: string,
-    public propertyKey: string
+    public propertyKey: string,
+    className?: string
   ) {
-    super(columnKey, headerDescription);
+    super(columnKey, headerDescription, className);
   }
 }

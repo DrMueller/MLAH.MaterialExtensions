@@ -8,10 +8,11 @@ export class TemplateColDefValueBuilderService implements IColDefValueBuilderSer
   public constructor(
     private columnKey: string,
     private headerDescription: string,
-    private templateRef: TemplateRef<any>) {
+    private templateRef: TemplateRef<any>,
+    private className?: string) {
   }
 
   public build(): ColumnDefinitionBase {
-    return new TemplateColumnDefinition(this.columnKey, this.headerDescription, this.templateRef);
+    return new TemplateColumnDefinition(this.columnKey, this.headerDescription, this.templateRef, this.className);
   }
 }

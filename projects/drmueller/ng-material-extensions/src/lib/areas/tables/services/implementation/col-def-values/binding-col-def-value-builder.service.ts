@@ -6,10 +6,15 @@ export class BindingColDefValueBuilderService implements IColDefValueBuilderServ
   public constructor(
     private columnKey: string,
     private headerDescription: string,
-    private propertyName: any) {
+    private propertyName: any,
+    private className?: string) {
   }
 
   public build(): ColumnDefinitionBase {
-    return new BindingColumnDefinition(this.columnKey, this.headerDescription, this.propertyName);
+    return new BindingColumnDefinition(
+      this.columnKey,
+      this.headerDescription,
+      this.propertyName,
+      this.className);
   }
 }

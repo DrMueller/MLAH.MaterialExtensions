@@ -11,8 +11,8 @@ export class ColDefBuilderOrchestratorService implements IColDefBuilderOrchestra
     this._builders = [];
   }
 
-  public withColumn(columnKey: string, headerDescription: string): IColDefBuilderService {
-    const colDefBuilder = new ColDefBuilderService(this, columnKey, headerDescription);
+  public withColumn(columnKey: string, headerDescription: string, className?: string): IColDefBuilderService {
+    const colDefBuilder = new ColDefBuilderService(this, columnKey, headerDescription, className);
     this._builders.push(colDefBuilder);
     return colDefBuilder;
   }

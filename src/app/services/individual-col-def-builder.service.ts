@@ -11,12 +11,12 @@ export class IndividualColDefBuilderService {
 
   public buildDefinitions(compWithButtonTemplate: TemplateRef<any>): ColumnDefinitionsContainer {
     return this.builderFactory
-    .startBuilding()
-    .withColumn('id', 'ID').bindingTo<Individual>('id')
-    .withColumn('emailAddress', 'E-Mail Address').bindingTo<Individual>('emailAddress')
-    .withColumn('firstName', 'First Name').bindingTo<Individual>('firstName')
-    .withColumn('lastName', 'Last Name').bindingTo<Individual>('lastName')
-    .withColumn('cmp1', 'Button 1').withTemplate(compWithButtonTemplate)
-    .build();
+      .startBuilding()
+      .withColumn('id', 'ID', 'fixed-width').bindingTo<Individual>('id')
+      .withColumn('emailAddress', 'E-Mail Address').bindingTo<Individual>('emailAddress')
+      .withColumn('firstName', 'First Name').bindingTo<Individual>('firstName')
+      .withColumn('lastName', 'Last Name').bindingTo<Individual>('lastName')
+      .withColumn('cmp1', '', 'auto-width').withTemplate(compWithButtonTemplate)
+      .build();
   }
 }

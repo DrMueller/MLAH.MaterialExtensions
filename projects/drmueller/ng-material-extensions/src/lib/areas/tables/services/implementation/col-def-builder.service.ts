@@ -10,16 +10,27 @@ export class ColDefBuilderService implements IColDefBuilderService {
   public constructor(
     private orchestrator: IColDefBuilderOrchestratorService,
     private columnKey: string,
-    private headerDescription: string) {
+    private headerDescription: string,
+    private className?: string) {
   }
 
   public bindingTo<T>(propertyName: keyof T): IColDefBuilderOrchestratorService {
-    this._valueBuilder = new BindingColDefValueBuilderService(this.columnKey, this.headerDescription, propertyName);
+    this._valueBuilder = new BindingColDefValueBuilderService(
+      this.columnKey,
+      this.headerDescription,
+      propertyName,
+      this.className);
+
     return this.orchestrator;
   }
 
   public withTemplate(template: TemplateRef<any>): IColDefBuilderOrchestratorService {
-    this._valueBuilder = new TemplateColDefValueBuilderService(this.columnKey, this.headerDescription, template);
+    this._valueBuilder = new TemplateColDefValueBuilderService(
+      this.columnKey,
+      this.headerDescription,
+      template,
+      this.className);
+
     return this.orchestrator;
   }
 
