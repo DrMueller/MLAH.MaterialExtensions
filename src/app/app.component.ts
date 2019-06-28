@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 
-import { IKeyValuePair } from '@drmueller/language-extensions';
-
 import { IndividualColDefBuilderService, IndividualRepositoryService } from './services';
 import {
   ColumnDefinitionsContainer, MatTableComponent, ModalDialogService, TableRowSelectionType
@@ -15,20 +13,13 @@ import { IndividualDialogComponent } from './individual-dialog/individual-dialog
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   @ViewChild(MatTableComponent) public table: MatTableComponent<Individual>;
+
   public columnDefinitions: ColumnDefinitionsContainer;
   public individuals: Individual[] = [];
-  public selectedIndividuals: Individual[] = [];
   public matDialogResult: any;
-
+  public selectedIndividuals: Individual[] = [];
   public selectedRowSelectionKey: number;
-
-  @ViewChild('compWithButton') compWithButtonTemplate: TemplateRef<any>;
-
-  public get rowSelectionType(): TableRowSelectionType {
-    return this.selectedRowSelectionKey;
-  }
 
   public constructor(
     private individualRepository: IndividualRepositoryService,
@@ -36,10 +27,15 @@ export class AppComponent implements OnInit {
     private modalDialogService: ModalDialogService) {
   }
 
-  public showDialog(): void {
-    this.modalDialogService.showModalDialog(this.selectedIndividuals[0], IndividualDialogComponent).afterClosed().subscribe(rslt => {
-      this.matDialogResult = rslt;
-    });
+  public anotherButtonClicked(individualId: string): void {
+    const indId = parseInt(individualId, 10);
+    const individual = this.individuals.find(ind => ind.id === indId);
+    alert('Hello from another Component Button: ' + JSON.stringify(individual));
+  }
+
+  public componentButtonClicked(individualId: number): void {
+    const individual = this.individuals.find(ind => ind.id === individualId);
+    alert('Hello from Component Button: ' + JSON.stringify(individual));
   }
 
   public deletedSelectedIndividuals(): void {
@@ -50,18 +46,26 @@ export class AppComponent implements OnInit {
     return this.selectedIndividuals && this.selectedIndividuals.length > 0;
   }
 
-  public componentButtonClicked(individualId: number): void {
-    const individual = this.individuals.find(ind => ind.id === individualId);
-    alert('Hello from Component Button: ' + JSON.stringify(individual));
+  public get rowSelectionType(): TableRowSelectionType {
+    return this.selectedRowSelectionKey;
   }
 
   public ngOnInit(): void {
     this.selectedRowSelectionKey = 1;
-    this.columnDefinitions = this.individualColDefBuilder.buildDefinitions(this.compWithButtonTemplate);
+    this.columnDefinitions = this.individualColDefBuilder.buildDefinitions(this.compWithButtonTemplate, this.anotherButtonTemplate);
     this.individuals = this.individualRepository.loadAll();
   }
 
   public rowSelectionChanged(selectedItems: Individual[]): void {
     this.selectedIndividuals = selectedItems;
   }
+
+  public showDialog(): void {
+    this.modalDialogService.showModalDialog(this.selectedIndividuals[0], IndividualDialogComponent).afterClosed().subscribe(rslt => {
+      this.matDialogResult = rslt;
+    });
+  }
+
+  @ViewChild('compWithButton') compWithButtonTemplate: TemplateRef<any>;
+  @ViewChild('anotherButton') anotherButtonTemplate: TemplateRef<any>;
 }

@@ -9,10 +9,12 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ColDefBuilderFactoryService } from './tables/services';
 import { MatTableComponent } from './tables/components/mat-table';
+import { ButtonTemplateComponent } from './tables/components/button-template/button-template.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
     MatSortModule,
@@ -23,7 +25,8 @@ import { MatTableComponent } from './tables/components/mat-table';
     MatCheckboxModule
   ],
   declarations: [
-    MatTableComponent
+    MatTableComponent,
+    ButtonTemplateComponent
   ],
   exports: [
     MatButtonModule,
@@ -39,7 +42,8 @@ import { MatTableComponent } from './tables/components/mat-table';
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatTableComponent
+    MatTableComponent,
+    ButtonTemplateComponent
   ],
 })
 export class NgMaterialExtensionsModule {

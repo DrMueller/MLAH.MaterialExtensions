@@ -12,8 +12,6 @@
 }
 
 ::ng-deep.auto-width {
-  width: auto;
-  align-self: center;
-  margin: 0px;
-  padding: 0px !important;
+  width: 1px;
+  white-space: nowrap;
 }

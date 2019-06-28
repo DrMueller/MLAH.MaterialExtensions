@@ -25,5 +25,9 @@
     <ng-template #compWithButton>
       <app-table-button (buttonClick)=componentButtonClicked($event)></app-table-button>
     </ng-template>
+
+    <ng-template #anotherButton>
+      <drm-button-template materialIcon="arrow_backward" materialColor="accent" (buttonClick)=anotherButtonClicked($event)></drm-button-template>
+    </ng-template>
   </mat-card-content>
 </mat-card>

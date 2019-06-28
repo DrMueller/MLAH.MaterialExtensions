@@ -9,7 +9,9 @@ export class IndividualColDefBuilderService {
 
   public constructor(private builderFactory: ColDefBuilderFactoryService) { }
 
-  public buildDefinitions(compWithButtonTemplate: TemplateRef<any>): ColumnDefinitionsContainer {
+  public buildDefinitions(
+    compWithButtonTemplate: TemplateRef<any>,
+    anotherButtonTemplate: TemplateRef<any>): ColumnDefinitionsContainer {
     return this.builderFactory
       .startBuilding()
       .withColumn('id', 'ID', 'fixed-width').bindingTo<Individual>('id')
@@ -17,6 +19,7 @@ export class IndividualColDefBuilderService {
       .withColumn('firstName', 'First Name').bindingTo<Individual>('firstName')
       .withColumn('lastName', 'Last Name').bindingTo<Individual>('lastName')
       .withColumn('cmp1', '', 'auto-width').withTemplate(compWithButtonTemplate)
+      .withColumn('cmp2', '', 'auto-width').withTemplate(anotherButtonTemplate)
       .build();
   }
 }
