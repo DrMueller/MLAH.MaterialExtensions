@@ -13,9 +13,10 @@ import { IndividualDialogComponent } from './individual-dialog/individual-dialog
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  @ViewChild(MatTableComponent) public table: MatTableComponent<Individual>;
-
   public columnDefinitions: ColumnDefinitionsContainer;
+  @ViewChild('compWithButton') public compWithButtonTemplate: TemplateRef<any>;
+  @ViewChild('anotherButton') public anotherButtonTemplate: TemplateRef<any>;
+  @ViewChild(MatTableComponent) public table: MatTableComponent<Individual>;
   public individuals: Individual[] = [];
   public matDialogResult: any;
   public selectedIndividuals: Individual[] = [];
@@ -57,6 +58,7 @@ export class AppComponent implements OnInit {
   }
 
   public rowSelectionChanged(selectedItems: Individual[]): void {
+    console.log(`Selected items: ${selectedItems.length}`);
     this.selectedIndividuals = selectedItems;
   }
 
@@ -65,7 +67,4 @@ export class AppComponent implements OnInit {
       this.matDialogResult = rslt;
     });
   }
-
-  @ViewChild('compWithButton') compWithButtonTemplate: TemplateRef<any>;
-  @ViewChild('anotherButton') anotherButtonTemplate: TemplateRef<any>;
 }
