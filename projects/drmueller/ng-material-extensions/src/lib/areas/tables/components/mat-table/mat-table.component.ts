@@ -98,7 +98,7 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
   }
 
   public toggleAllSelections(): void {
-    if (this._rowSelectionType == TableRowSelectionType.Multi) {
+    if (this._rowSelectionType === TableRowSelectionType.Multi) {
       this._data.forEach(row => this.selection.toggle(row));
       this.selectionChanged.emit(this.selection.selected);
     }
