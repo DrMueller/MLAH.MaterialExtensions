@@ -16,36 +16,36 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
   @Input() public columnDefinitions: ColumnDefinitionsContainer;
   @Input() public idSelector: keyof T;
   @Output() public selectionChanged = new EventEmitter<T[]>();
-
-  public searchText: string;
-  public selection: SelectionModel<T>;
-
-  @ViewChild(MatPaginator) public matPaginator: MatPaginator;
-  @ViewChild(MatSort) public matSort: MatSort;
-  @ViewChild(MatTable) public matTable: MatTable<T>;
-
-  private _dataSource: MatTableDataSource<T>;
-  private _rowSelectionType: TableRowSelectionType;
-  private _data: T[];
-
-  public get dataSource(): MatTableDataSource<T> {
-    return this._dataSource;
-  }
-
-  public get canToggleAllSelections(): boolean {
-    return this._rowSelectionType === TableRowSelectionType.Multi;
-  }
-
   @Input() public set data(values: T[]) {
     this._data = values;
     if (this.matTable) {
-      this.bindDataIfReady();
+      this.bindData();
     }
   }
 
   @Input() public set rowSelectionType(value: TableRowSelectionType) {
     this._rowSelectionType = value;
-    this.bindDataIfReady();
+    this.initializeDataSource();
+    this.bindData();
+  }
+
+  @ViewChild(MatPaginator) public matPaginator: MatPaginator;
+  @ViewChild(MatSort) public matSort: MatSort;
+  @ViewChild(MatTable) public matTable: MatTable<T>;
+
+  public searchText: string;
+  public selection: SelectionModel<T>;
+
+  private _dataSource: MatTableDataSource<T>;
+  private _rowSelectionType: TableRowSelectionType;
+  private _data: T[];
+
+  public get canToggleAllSelections(): boolean {
+    return this._rowSelectionType === TableRowSelectionType.Multi;
+  }
+
+  public get dataSource(): MatTableDataSource<T> {
+    return this._dataSource;
   }
 
   public deleteEntries(entries: T[]): void {
@@ -55,7 +55,7 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     });
 
     this.selection.deselect(...entries);
-    this.bindDataIfReady();
+    this.bindData();
     this.selectionChanged.emit(this.selection.selected);
     this.matTable.renderRows();
   }
@@ -85,11 +85,16 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.bindDataIfReady();
+    this.initializeDataSource();
   }
 
   public searchTextChanged(newSearchText: string): void {
     this.dataSource.filter = newSearchText.toLocaleLowerCase();
+  }
+
+  public toggleRowSelection(row: T): void {
+    this.selection.toggle(row);
+    this.selectionChanged.emit(this.selection.selected);
   }
 
   public toggleAllSelections(): void {
@@ -99,17 +104,14 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     }
   }
 
-  public toggleRowSelection(row: T): void {
-    this.selection.toggle(row);
-    this.selectionChanged.emit(this.selection.selected);
+  private bindData(): void {
+    this._dataSource = new MatTableDataSource<T>(this._data);
+    this.dataSource.paginator = this.matPaginator;
+    this.dataSource.sort = this.matSort;
   }
 
-  private bindDataIfReady(): void {
-    if (this._data) {
-      this.selection = new SelectionModel<T>(this._rowSelectionType === TableRowSelectionType.Multi, []);
-      this._dataSource = new MatTableDataSource<T>(this._data);
-      this.dataSource.paginator = this.matPaginator;
-      this.dataSource.sort = this.matSort;
-    }
+  private initializeDataSource(): void {
+    this.selection = new SelectionModel<T>(this._rowSelectionType === TableRowSelectionType.Multi, []);
+    this._dataSource = new MatTableDataSource<T>(this._data);
   }
 }
