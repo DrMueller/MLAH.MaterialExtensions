@@ -28,9 +28,20 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
   private _rowSelectionType: TableRowSelectionType;
   private _data: T[];
 
+  public get dataSource(): MatTableDataSource<T> {
+    return this._dataSource;
+  }
+
+  @Input() public set data(values: T[]) {
+    this._data = values;
+    if (this.matTable) {
+      this.bindDataIfReady();
+    }
+  }
+
   @Input() public set rowSelectionType(value: TableRowSelectionType) {
     this._rowSelectionType = value;
-    this.initializeDataSource();
+    this.bindDataIfReady();
   }
 
   public deleteEntries(entries: T[]): void {
@@ -40,7 +51,7 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     });
 
     this.selection.deselect(...entries);
-    this.bindData();
+    this.bindDataIfReady();
     this.selectionChanged.emit(this.selection.selected);
     this.matTable.renderRows();
   }
@@ -70,7 +81,7 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
-    this.initializeDataSource();
+    this.bindDataIfReady();
   }
 
   public searchTextChanged(newSearchText: string): void {
@@ -81,24 +92,13 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     this.selection.toggle(row);
     this.selectionChanged.emit(this.selection.selected);
   }
-  @Input() public set data(values: T[]) {
-    this._data = values;
-    if (this.matTable) {
-      this.bindData();
+
+  private bindDataIfReady(): void {
+    if (this._data) {
+      this.selection = new SelectionModel<T>(this._rowSelectionType === TableRowSelectionType.Multi, []);
+      this._dataSource = new MatTableDataSource<T>(this._data);
+      this.dataSource.paginator = this.matPaginator;
+      this.dataSource.sort = this.matSort;
     }
-  }
-  public get dataSource(): MatTableDataSource<T> {
-    return this._dataSource;
-  }
-
-  private bindData(): void {
-    this._dataSource = new MatTableDataSource<T>(this._data);
-    this.dataSource.paginator = this.matPaginator;
-    this.dataSource.sort = this.matSort;
-  }
-
-  private initializeDataSource(): void {
-    this.selection = new SelectionModel<T>(this._rowSelectionType === TableRowSelectionType.Multi, []);
-    this._dataSource = new MatTableDataSource<T>(this._data);
   }
 }
