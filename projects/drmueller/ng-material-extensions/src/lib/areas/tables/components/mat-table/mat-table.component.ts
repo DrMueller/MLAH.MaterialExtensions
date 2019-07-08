@@ -32,6 +32,10 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     return this._dataSource;
   }
 
+  public get canToggleAllSelections(): boolean {
+    return this._rowSelectionType === TableRowSelectionType.Multi;
+  }
+
   @Input() public set data(values: T[]) {
     this._data = values;
     if (this.matTable) {
@@ -86,6 +90,12 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
 
   public searchTextChanged(newSearchText: string): void {
     this.dataSource.filter = newSearchText.toLocaleLowerCase();
+  }
+
+  public toggleAllSelections(): void {
+    if (this._rowSelectionType == TableRowSelectionType.Multi) {
+      this._data.forEach(row => this.selection.toggle(row));
+    }
   }
 
   public toggleRowSelection(row: T): void {
