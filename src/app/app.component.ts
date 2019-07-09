@@ -14,6 +14,7 @@ import { IndividualDialogComponent } from './individual-dialog/individual-dialog
 })
 export class AppComponent implements OnInit {
   public columnDefinitions: ColumnDefinitionsContainer;
+  public isBusyIndicatorShown = false;
   @ViewChild('compWithButton') public compWithButtonTemplate: TemplateRef<any>;
   @ViewChild('anotherButton') public anotherButtonTemplate: TemplateRef<any>;
   @ViewChild(MatTableComponent) public table: MatTableComponent<Individual>;
@@ -66,5 +67,9 @@ export class AppComponent implements OnInit {
     this.modalDialogService.showModalDialog(this.selectedIndividuals[0], IndividualDialogComponent).afterClosed().subscribe(rslt => {
       this.matDialogResult = rslt;
     });
+  }
+
+  public toggleBusyIndicator(): void {
+    this.isBusyIndicatorShown = !this.isBusyIndicatorShown;
   }
 }

@@ -3,6 +3,10 @@
   <mat-card-content>
     <button mat-button [disabled]="!areIndividualsSelected" (click)="deletedSelectedIndividuals()">Delete</button>
     <button mat-button [disabled]="!areIndividualsSelected" (click)="showDialog()">Dialog!</button>
+    <button mat-raised-button color="primary" (click)="toggleBusyIndicator()">
+      <span *appBusyIndicator="isBusyIndicatorShown"></span>
+      <span>Busy!</span>
+    </button>
   </mat-card-content>
 </mat-card>
 
@@ -27,7 +31,8 @@
     </ng-template>
 
     <ng-template #anotherButton>
-      <drm-button-template materialIcon="arrow_backward" materialColor="accent" (buttonClick)=anotherButtonClicked($event)></drm-button-template>
+      <drm-button-template materialIcon="arrow_backward" materialColor="accent"
+        (buttonClick)=anotherButtonClicked($event)></drm-button-template>
     </ng-template>
   </mat-card-content>
 </mat-card>
