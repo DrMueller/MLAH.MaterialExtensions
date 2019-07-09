@@ -4,7 +4,7 @@
     <button mat-button [disabled]="!areIndividualsSelected" (click)="deletedSelectedIndividuals()">Delete</button>
     <button mat-button [disabled]="!areIndividualsSelected" (click)="showDialog()">Dialog!</button>
     <button mat-raised-button color="primary" (click)="toggleBusyIndicator()">
-      <span *appBusyIndicator="isBusyIndicatorShown"></span>
+      <span *drmBusyIndicator="isBusyIndicatorShown"></span>
       <span>Busy!</span>
     </button>
   </mat-card-content>

@@ -8,7 +8,7 @@ const inactiveStyle = style({
 const timing = '3000ms ease';
 
 @Component({
-  selector: 'app-busy-indicator',
+  selector: 'drm-busy-indicator',
   templateUrl: './busy-indicator.component.html',
   styleUrls: ['./busy-indicator.component.scss'],
   animations: [

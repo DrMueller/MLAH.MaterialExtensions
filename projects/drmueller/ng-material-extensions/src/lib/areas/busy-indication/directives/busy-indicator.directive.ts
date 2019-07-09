@@ -3,7 +3,7 @@ import { ComponentFactory, ComponentFactoryResolver, Directive, Input, TemplateR
 import { BusyIndicatorComponent } from '../components/busy-indicator';
 
 @Directive({
-  selector: '[appBusyIndicator]'
+  selector: '[drmBusyIndicator]'
 })
 export class BusyIndicatorDirective {
   private _indicatorFactory: ComponentFactory<BusyIndicatorComponent>;
