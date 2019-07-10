@@ -3,7 +3,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import {
   MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatPaginatorModule, MatSidenavModule, MatSortModule,
-  MatTableModule, MatToolbarModule, MatDialogModule, MatCheckboxModule
+  MatTableModule, MatToolbarModule, MatDialogModule, MatCheckboxModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import { FormsModule } from '@angular/forms';
@@ -19,6 +19,7 @@ import { BusyIndicatorDirective } from './busy-indication/directives';
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
     MatDialogModule,
@@ -36,7 +37,6 @@ import { BusyIndicatorDirective } from './busy-indication/directives';
     BusyIndicatorComponent
   ],
   exports: [
-    BusyIndicatorComponent,
     BusyIndicatorDirective,
     MatButtonModule,
     MatMenuModule,

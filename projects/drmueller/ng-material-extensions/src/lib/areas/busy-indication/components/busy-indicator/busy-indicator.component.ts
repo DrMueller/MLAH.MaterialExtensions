@@ -24,4 +24,5 @@ const timing = '3000ms ease';
   ]
 })
 export class BusyIndicatorComponent {
+  public showIndicator: boolean;
 }

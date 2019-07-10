@@ -16,7 +16,7 @@ export class BusyIndicatorDirective {
   }
 
   @Input()
-  public set appBusyIndicator(isBusy: boolean) {
+  public set drmBusyIndicator(isBusy: boolean) {
     this.vcRef.clear();
 
     if (isBusy) {
