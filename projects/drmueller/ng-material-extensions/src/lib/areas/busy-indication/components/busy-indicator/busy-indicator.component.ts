@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   animations: [
     trigger('fadeInOut',
     [
-      state('1', style(
+      state('*', style(
         {
           opacity: 100,
           display: 'inline-block'
