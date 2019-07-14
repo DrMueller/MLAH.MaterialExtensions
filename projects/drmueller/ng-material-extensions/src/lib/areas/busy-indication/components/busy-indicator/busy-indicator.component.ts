@@ -1,25 +1,24 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger, state } from '@angular/animations';
 import { Component } from '@angular/core';
-
-const inactiveStyle = style({
-  opacity: 0,
-});
-
-const timing = '3000ms ease';
 
 @Component({
   selector: 'drm-busy-indicator',
   templateUrl: './busy-indicator.component.html',
   styleUrls: ['./busy-indicator.component.scss'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        inactiveStyle,
-        animate(timing)
-      ]),
-      transition(':leave', [
-        animate(timing, inactiveStyle)
-      ])
+    trigger('fadeInOut',
+    [
+      state('1', style(
+        {
+          opacity: 100,
+          display: 'inline-block'
+        })),
+      state('0', style(
+        {
+          opacity: 0,
+          display: 'none'
+        })),
+      transition('* => *', animate('600ms ease-out'))
     ])
   ]
 })
