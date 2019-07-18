@@ -54,7 +54,7 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
       this._data.splice(dtoIndex, 1);
     });
 
-    this.selection.deselect(...entries);
+    this.deSelectEntries(entries);
     this.bindData();
     this.selectionChanged.emit(this.selection.selected);
     this.matTable.renderRows();
@@ -108,6 +108,18 @@ export class MatTableComponent<T> implements OnInit, AfterViewInit {
     this._dataSource = new MatTableDataSource<T>(this._data);
     this.dataSource.paginator = this.matPaginator;
     this.dataSource.sort = this.matSort;
+  }
+
+  private deSelectEntries(entries: T[]): void {
+    if (this._rowSelectionType === TableRowSelectionType.ReadOnly) {
+      return;
+    }
+
+    if (this._rowSelectionType === TableRowSelectionType.Single) {
+      entries.forEach(entry => this.selection.deselect(entry));
+    } else {
+      this.selection.deselect(...entries);
+    }
   }
 
   private initializeDataSource(): void {
